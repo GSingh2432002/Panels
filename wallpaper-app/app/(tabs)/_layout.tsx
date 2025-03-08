@@ -1,33 +1,37 @@
+import { Colors } from '@/constants/Colors';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Tabs } from 'expo-router';
+import { useColorScheme } from 'react-native';
 
 export default function TabLayout() {
+  const theme = useColorScheme() ?? "light";
+
   return (
-    <Tabs screenOptions={{ tabBarActiveTintColor: 'blue', headerShown: false }}>
+    <Tabs screenOptions={{ tabBarActiveTintColor: Colors[theme].tint, headerShown: false, tabBarStyle: {
+      backgroundColor: Colors[theme].background
+    }}}>
       <Tabs.Screen
-        name="index"
+        name="foryou"
         options={{
           title: 'For you',
           tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />,
         }}
       />
       <Tabs.Screen
-        name="account"
+        name="index"
         options={{
-          title: 'Account',
-          tabBarIcon: ({ color }) => <FontAwesome size={28} name="cog" color={color} />,
+          title: 'Explore',
+          tabBarIcon: ({ color }) => <FontAwesome size={28} name="feed" color={color} />,
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="account"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <FontAwesome size={28} name="cog" color={color} />,
+          title: 'Account',
+          tabBarIcon: ({ color }) => <FontAwesome size={28} name="user" color={color} />,
         }}
       />
+
     </Tabs>
   );
 }
-
-
-// Slot is similar to children in Nextjs. It is a placeholder for the content of the current route.
